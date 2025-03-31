@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Enhanced Open Source License Chooser</title>
+  <!-- Google Fonts for a modern look -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    /* Reset and basic styling */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: 'Roboto', sans-serif;
+      background: linear-gradient(135deg, #74ABE2, #5563DE);
+      color: #333;
+      padding: 20px;
+      min-height: 100vh;
+    }
+    .container {
+      max-width: 800px;
+      background: #fff;
+      margin: auto;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #5563DE;
+    }
+    form fieldset {
+      border: 1px solid #ddd;
+      margin-bottom: 20px;
+      padding: 15px 20px;
+      border-radius: 6px;
+    }
+    form fieldset legend {
+      font-weight: 500;
+      padding: 0 5px;
+      color: #333;
+    }
+    .question {
+      margin-bottom: 15px;
+    }
+    .question label {
+      display: block;
+      margin-bottom: 5px;
+      cursor: pointer;
+    }
+    .question input[type="radio"],
+    .question input[type="checkbox"] {
+      margin-right: 8px;
+    }
+    button {
+      width: 100%;
+      padding: 15px;
+      background: #5563DE;
+      border: none;
+      color: #fff;
+      font-size: 18px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    button:hover {
+      background: #4453b3;
+    }
+    #result {
+      margin-top: 25px;
+      padding: 20px;
+      background: #e6ffe6;
+      border: 1px solid #70d070;
+      border-radius: 6px;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Enhanced Open Source License Chooser</h1>
+    <form id="licenseForm">
+
+      <!-- Fieldset 1: Basic licensing needs -->
+      <fieldset>
+        <legend>Basic Requirements</legend>
+        <div class="question">
+          <p>1. Should derivative works be required to use the same license?</p>
+          <label><input type="radio" name="copyleft" value="yes" required> Yes, I want strong copyleft</label>
+          <label><input type="radio" name="copyleft" value="no"> No, permissive is fine</label>
+        </div>
+        <div class="question">
+          <p>2. Should commercial use be unrestricted?</p>
+          <label><input type="radio" name="commercial" value="yes" required> Yes, open to commercial use</label>
+          <label><input type="radio" name="commercial" value="no"> No, restrict commercial use or require dual licensing</label>
+        </div>
+        <div class="question">
+          <p>3. Is a patent grant important?</p>
+          <label><input type="radio" name="patent" value="yes" required> Yes, include a patent grant</label>
+          <label><input type="radio" name="patent" value="no"> No, not necessary</label>
+        </div>
+      </fieldset>
+
+      <!-- Fieldset 2: Project Purpose -->
+      <fieldset>
+        <legend>Project Purpose & Goals</legend>
+        <div class="question">
+          <p>4. What is your primary goal for releasing your code?</p>
+          <label><input type="radio" name="purpose" value="adoption" required>
+            Maximize adoption and allow use by anyone (e.g., MIT, BSD)</label>
+          <label><input type="radio" name="purpose" value="share" required>
+            Encourage sharing and contributions (e.g., GPL)</label>
+          <label><input type="radio" name="purpose" value="dual" required>
+            Dual licensing: open source for community use, but commercial users must purchase a license</label>
+          <label><input type="radio" name="purpose" value="noncommercial" required>
+            Restrict to non-commercial uses only</label>
+        </div>
+      </fieldset>
+
+      <!-- Fieldset 3: Project Type -->
+      <fieldset>
+        <legend>Project Type & Compatibility</legend>
+        <div class="question">
+          <p>5. Is your project a library or a full application?</p>
+          <label><input type="radio" name="projectType" value="library" required> Library (for integration)</label>
+          <label><input type="radio" name="projectType" value="application" required> Standalone application</label>
+        </div>
+        <div class="question">
+          <p>6. Do you require compatibility with specific platforms?</p>
+          <label><input type="checkbox" name="platforms" value="linux"> Linux kernel or similar systems</label>
+          <label><input type="checkbox" name="platforms" value="iot"> Consumer electronics / IoT devices</label>
+          <label><input type="checkbox" name="platforms" value="mobile"> Mobile platforms</label>
+        </div>
+      </fieldset>
+
+      <!-- Fieldset 4: Additional Preferences -->
+      <fieldset>
+        <legend>Additional Preferences</legend>
+        <div class="question">
+          <p>7. Must modifications (or improvements) be shared publicly?</p>
+          <label><input type="radio" name="modifications" value="yes" required> Yes, all modifications must be open</label>
+          <label><input type="radio" name="modifications" value="no" required> No, private modifications are allowed</label>
+        </div>
+        <div class="question">
+          <p>8. Is requiring attribution important for you?</p>
+          <label><input type="radio" name="attribution" value="yes" required> Yes, I want credit for my work</label>
+          <label><input type="radio" name="attribution" value="no" required> No, not necessary</label>
+        </div>
+        <div class="question">
+          <p>9. Do you want to allow sublicensing (using parts under different terms)?</p>
+          <label><input type="radio" name="sublicensing" value="yes" required> Yes</label>
+          <label><input type="radio" name="sublicensing" value="no" required> No</label>
+        </div>
+        <div class="question">
+          <p>10. Do you prefer using a license popular within your community?</p>
+          <label><input type="radio" name="popularity" value="yes" required> Yes, I prefer well-known licenses</label>
+          <label><input type="radio" name="popularity" value="no" required> No, I'm open to lesser-known licenses</label>
+        </div>
+      </fieldset>
+
+      <button type="submit">Get My Recommended License</button>
+    </form>
+
+    <div id="result"></div>
+  </div>
+
+  <script>
+    document.getElementById('licenseForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+
+      // Collect responses from radio buttons
+      var form = event.target;
+      var copyleft = form.copyleft.value;
+      var commercial = form.commercial.value;
+      var patent = form.patent.value;
+      var purpose = form.purpose.value;
+      var projectType = form.projectType.value;
+      var modifications = form.modifications.value;
+      var attribution = form.attribution.value;
+      var sublicensing = form.sublicensing.value;
+      var popularity = form.popularity.value;
+      
+      // Collect platforms checkboxes (if any)
+      var platformElems = document.querySelectorAll('input[name="platforms"]:checked');
+      var platforms = Array.from(platformElems).map(el => el.value);
+
+      // Example decision logic (this is simplified; you can expand it further):
+      var license = "";
+
+      // If non-commercial is chosen:
+      if(purpose === "noncommercial") {
+        license = "Creative Commons Attribution-NonCommercial 4.0 International (CC BY-NC 4.0)";
+      }
+      // Dual licensing option:
+      else if(purpose === "dual") {
+        license = "Dual License (e.g., GPL for open source and a commercial license for proprietary use)";
+      }
+      // Strong copyleft with public modification sharing
+      else if(copyleft === "yes" && modifications === "yes") {
+        // Check for patent and commercial support
+        if (commercial === "yes" && patent === "yes") {
+          license = "GNU General Public License v3.0 (GPLv3)";
+        } else {
+          license = "GNU General Public License v2.0 (GPLv2)";
+        }
+      }
+      // Permissive path:
+      else if(copyleft === "no") {
+        if (commercial === "yes") {
+          license = "MIT License";
+        } else {
+          license = "BSD 3-Clause License";
+        }
+      }
+      // Fallback option:
+      else {
+        license = "Mozilla Public License 2.0 (MPL 2.0)";
+      }
+
+      // Adjust recommendation based on additional preferences
+      if (attribution === "yes" && license === "MIT License") {
+        // MIT already requires attribution, so that fits.
+      }
+      if (platforms.includes("linux") && license === "MIT License") {
+        // If Linux kernel compatibility is needed, you might consider a more copyleft approach.
+        license = "GNU General Public License (choose v2 or v3 based on other factors)";
+      }
+      // You could also include more nuanced logic based on projectType, sublicensing, and popularity.
+      
+      // Display the recommendation
+      var resultDiv = document.getElementById('result');
+      resultDiv.style.display = "block";
+      resultDiv.innerHTML = "<h2>Recommended License:</h2><p>" + license + "</p>";
+    });
+  </script>
+</body>
+</html>
+
